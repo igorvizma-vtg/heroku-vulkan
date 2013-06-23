@@ -27,17 +27,12 @@ cp -a /tmp/usr/lib/* /app/local/lib
 
 # curl -L ftp://mcrypt.hellug.gr/pub/crypto/mcrypt/libmcrypt/libmcrypt-2.5.7.tar.gz -o /tmp/libmcrypt-2.5.7.tar.gz
 # curl -L ftp://ftp.andrew.cmu.edu/pub/cyrus-mail/cyrus-sasl-2.1.25.tar.gz -o /tmp/cyrus-sasl-2.1.25.tar.gz
-curl -L https://launchpad.net/libmemcached/1.0/1.0.11/+download/libmemcached-1.0.11.tar.gz -o /tmp/libmemcached-1.0.11.tar.gz
 curl -L http://www.apache.org/dist/httpd/httpd-2.2.23.tar.gz -o /tmp/httpd-2.2.23.tar.gz
-curl -L http://us.php.net/get/php-$PHP_VERSION.tar.gz/from/us2.php.net/mirror -o /tmp/php-$PHP_VERSION.tar.gz
-curl -L http://pecl.php.net/get/memcached-2.1.0.tgz -o /tmp/memcached-2.1.0.tgz
 
 # tar -C /tmp -xzf /tmp/libmcrypt-2.5.7.tar.gz
 # tar -C /tmp -xzf /tmp/cyrus-sasl-2.1.25.tar.gz
-tar -C /tmp -xzf /tmp/libmemcached-1.0.11.tar.gz
 tar -C /tmp -xzf /tmp/httpd-2.2.23.tar.gz
-tar -C /tmp -xzf /tmp/php-$PHP_VERSION.tar.gz
-tar -C /tmp -xzf /tmp/memcached-2.1.0.tgz
+
 
 export CFLAGS='-g0 -O2 -s -m64 -march=core2 -mtune=generic -pipe '
 export CXXFLAGS="${CFLAGS}"
@@ -51,12 +46,30 @@ export MAKE_CMD="/usr/bin/make $MAKEFLAGS"
 # ${MAKE_CMD} && ${MAKE_CMD} install
 
 cd /tmp/httpd-2.2.23
+#ls -la ./
+ls -la /tmp
 ./configure --prefix=/app/apache --enable-rewrite --enable-so --enable-deflate --enable-expires --enable-headers
-${MAKE_CMD} && ${MAKE_CMD} install
+make && make install
+
+echo "apache done"
+
+cd /tmp
+curl -L http://us.php.net/get/php-$PHP_VERSION.tar.gz/from/us2.php.net/mirror -o /tmp/php-$PHP_VERSION.tar.gz
+tar -C /tmp -xzf /tmp/php-$PHP_VERSION.tar.gz
 
 cd /tmp/php-$PHP_VERSION
+#./configure --prefix=/app/php --with-apxs2=/app/apache/bin/apxs --with-mysql=mysqlnd --with-pdo-mysql=mysqlnd --with-iconv --with-gd --with-curl=/usr/lib --with-config-file-path=/app/php --enable-soap=shared --with-openssl --enable-mbstring --with-mhash --enable-mysqlnd --with-pear --with-mysqli=mysqlnd --disable-cgi --with-jpeg-dir --with-png-dir --with-mcrypt=/app/local --enable-static
 ./configure --prefix=/app/php --with-apxs2=/app/apache/bin/apxs --with-mysql=mysqlnd --with-pdo-mysql=mysqlnd --with-iconv --with-gd --with-curl=/usr/lib --with-config-file-path=/app/php --enable-soap=shared --with-openssl --enable-mbstring --with-mhash --enable-mysqlnd --with-pear --with-mysqli=mysqlnd --disable-cgi --with-jpeg-dir --with-png-dir --with-mcrypt=/app/local --enable-static
-${MAKE_CMD} && ${MAKE_CMD} install
+#${MAKE_CMD} && ${MAKE_CMD} install
+make && make install
+
+cd /tmp
+curl -L https://launchpad.net/libmemcached/1.0/1.0.11/+download/libmemcached-1.0.11.tar.gz -o /tmp/libmemcached-1.0.11.tar.gz
+tar -C /tmp -xzf /tmp/libmemcached-1.0.11.tar.gz
+
+cd /tmp
+curl -L http://pecl.php.net/get/memcached-2.1.0.tgz -o /tmp/memcached-2.1.0.tgz
+tar -C /tmp -xzf /tmp/memcached-2.1.0.tgz
 
 /app/php/bin/pear config-set php_dir /app/php
 /app/php/bin/pecl install igbinary
@@ -72,10 +85,10 @@ cd /tmp/libmemcached-1.0.11
 ./configure --prefix=/app/local
 # the configure script detects sasl, but is still foobar'ed
 # sed -i 's/LIBMEMCACHED_WITH_SASL_SUPPORT 0/LIBMEMCACHED_WITH_SASL_SUPPORT 1/' Makefile
-${MAKE_CMD} && ${MAKE_CMD} install
+make && make install
 
 # for libmemcached 1.0.4
-# LDFLAGS=-L/app/local/lib ./configure --prefix=/app/local --with-libsasl2-prefix=/usr    
+# LDFLAGS=-L/app/local/lib ./configure --prefix=/app/local --with-libsasl2-prefix=/usr
 
 cd /tmp/memcached-2.1.0
 /app/php/bin/phpize
@@ -85,14 +98,15 @@ cd /tmp/memcached-2.1.0
   --enable-memcached-json \
   --with-php-config=/app/php/bin/php-config \
   --enable-static
-${MAKE_CMD} && ${MAKE_CMD} install
+make && make install
 
 echo '2.2.23' > /app/apache/VERSION
 echo "$PHP_VERSION" > /app/php/VERSION
-mkdir /tmp/build
-mkdir /tmp/build/local
-mkdir /tmp/build/local/lib
-mkdir /tmp/build/local/lib/sasl2
+#mkdir /tmp/build
+#mkdir /tmp/build/local
+#mkdir /tmp/build/local/lib
+
+mkdir -p /tmp/build/local/lib/sasl2
 cp -a /app/apache /tmp/build/
 cp -a /app/php /tmp/build/
 # cp -aL /usr/lib/libmysqlclient.so.16 /tmp/build/local/lib/
