@@ -2,17 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="af3227c0-53bf-44a2-a034-cdc6c98917d0" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/compile" afterPath="$PROJECT_DIR$/bin/compile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/vulcan.sh" afterPath="$PROJECT_DIR$/build/vulcan.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
     </list>
     <ignored path="source6.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/a.dummy" changelist="af3227c0-53bf-44a2-a034-cdc6c98917d0" time="1371989610559" ignored="false" />
     <file path="/compile" changelist="af3227c0-53bf-44a2-a034-cdc6c98917d0" time="1371989039514" ignored="false" />
     <file path="$PROJECT_DIR$/../source5/Procfile" changelist="af3227c0-53bf-44a2-a034-cdc6c98917d0" time="1371830035784" ignored="false" />
-    <file path="/Dummy.txt" changelist="af3227c0-53bf-44a2-a034-cdc6c98917d0" time="1371992988756" ignored="false" />
+    <file path="/Dummy.txt" changelist="af3227c0-53bf-44a2-a034-cdc6c98917d0" time="1371993001164" ignored="false" />
     <file path="/Procfile" changelist="af3227c0-53bf-44a2-a034-cdc6c98917d0" time="1371830034639" ignored="false" />
     <file path="$PROJECT_DIR$/../source5/heroku/web-boot.sh" changelist="af3227c0-53bf-44a2-a034-cdc6c98917d0" time="1371831020786" ignored="false" />
     <file path="/web-boot.sh" changelist="af3227c0-53bf-44a2-a034-cdc6c98917d0" time="1371831020786" ignored="false" />
@@ -212,7 +210,11 @@
       <created>1371992995520</created>
       <updated>1371992995520</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Merge branch 'master' of https://github.com/igorvizma-vtg/heroku-vulkan&#10;&#10;Conflicts:&#10;&#9;README.md&#10;">
+      <created>1371993004157</created>
+      <updated>1371993004157</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
