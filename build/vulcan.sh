@@ -43,7 +43,7 @@ export CFLAGS='-g0 -O2 -s -m64 -march=core2 -mtune=generic -pipe '
 export CXXFLAGS="${CFLAGS}"
 export CPPFLAGS="-I/app/local/include"
 export LD_LIBRARY_PATH="/app/local/lib"
-export MAKEFLAGS="-j5"
+export MAKEFLAGS="-j5".gitignore
 export MAKE_CMD="/usr/bin/make $MAKEFLAGS"
 
 # cd /tmp/libmcrypt-2.5.7

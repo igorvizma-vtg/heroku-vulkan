@@ -33,7 +33,8 @@ if [ -f www/Procfile ]; then
 fi
 
 
-BP_URL="http://heroku-buildpack-testing.s3.amazonaws.com/apache-$APACHE_VERSION-php-$PHP_VERSION-v$BUILDPACK_VERSION.tar.gz"
+#BP_URL="http://heroku-buildpack-testing.s3.amazonaws.com/apache-$APACHE_VERSION-php-$PHP_VERSION-v$BUILDPACK_VERSION.tar.gz"
+BP_URL="http://tiadev.visiontechglobal.com/app/php-apache.tar.gz"
 echo "-----> Bundling Apache $APACHE_VERSION PHP $PHP_VERSION build $BUILDPACK_VERSION"
 echo "-----> Buildpack URL $BP_URL"
 curl --max-time 60 --location "$BP_URL" | tar xz
